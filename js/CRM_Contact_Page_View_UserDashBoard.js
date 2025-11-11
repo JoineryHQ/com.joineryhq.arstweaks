@@ -1,7 +1,7 @@
 /*global CRM, ts */
 CRM.$(function($) {
-  var ajaxStop = function ajaxStop() {
-    // Tweak contents of the "Your Event(s)" section.
+  $( document ).ajaxStop(function() {
+    // Tweak contents of the "Your Event(s)" secion.
     $('.crm-dashboard-civievent .view-content tbody > tr').each(function(){
       // Remove link to event (in "Event" column)
       var eventTitle = $('> td:first-child a', this).text();
@@ -13,7 +13,12 @@ CRM.$(function($) {
     // can "Click on the event name for more information."
     $('.crm-dashboard-civievent .view-content .description').hide();
 
-    // Tweak contents of the "permissionedOrgs" (Relationships) secion:
+    // Tweak contents of the "Your Contacts / Organizations" secion.
+    var requestEndRelationshipUrl, dasbhoardLink;
+    // Store the current page url as a base64 string (because we're going to append
+    // this value as a query string parameter, and we want to avoid potential url
+    // syntax/encoding problems.
+    var dashbase = btoa(window.location.href);
     $('.crm-contact-relationship-user tbody > tr').each(function(){
       // Remove link to relationship (in "Relationship" column"), and
       // also remove link to related contact (in second column).
@@ -31,34 +36,16 @@ CRM.$(function($) {
       // Remove 'Edit Contact Information' link on individual contact rows.
       $('tr.crm-entity[data-entity="relationship"] a[title="Edit Contact Information"]').remove();
     });
-  };
-  
-  var addMemberCardButtons = function addMemberCardButtons() {
-    if ((!CRM.vars.arstweaks) || (!CRM.vars.arstweaks.contactId)) {
-      // CRM.vars.arstweaks.contactId is defined when user has access to 'print memership card'.
-      // If it's not defined, there's nothing to do here; just return.
-      return;
-    } 
-    var contactId = CRM.vars.arstweaks.contactId;
-    var certificateUrl;
-    var membershipId;
-    var buttonLabel = ts('Download membership card');
-    var buttonHtml;
-    for (var i in CRM.vars.arstweaks.currentMembershipIds) {
-      membershipId = CRM.vars.arstweaks.currentMembershipIds[i];
-      certificateUrl = '/civicrm/certificates/membership/pdf?cid=' + contactId + '&mid=' + membershipId;
+  });
 
-      // final 'buttons' td might be missing (e.g. if it would be empty), so create if necessary.
-      if (!$('tr.crm-dashboard-civimember tr#row_' + membershipId + ' td.crm-active-membership-renew').length) {
-        $('tr.crm-dashboard-civimember tr#row_' + membershipId).append('<td class="crm-active-membership-renew">');
-      }
-      buttonHtml = '<a href="' + certificateUrl + '" class="button"><span class="nowrap">' + buttonLabel + '</span></a>';
-      $('tr.crm-dashboard-civimember tr#row_' + membershipId + ' td.crm-active-membership-renew').prepend(buttonHtml);
-    }
+  // Check if there is an injected element
+  if ($('.arstweaks-inject').length) {
+    // Get the injected element
+    var injectedElements = $('.arstweaks-inject').html();
+    // Place injected element in Your Contacts / Organizations row
+    $('.crm-dashboard-permissionedOrgs td').append(injectedElements);
+    // Remove injected element
+    $('.arstweaks-inject').remove();
   }
- 
-  // Execution begins here.
-  $( document ).ajaxStop(ajaxStop);
-  addMemberCardButtons();
 
 });

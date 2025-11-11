@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <extension key="com.joineryhq.arstweaks" type="module">
   <file>arstweaks</file>
-  <name>ARS Tweaks (CiviCRM)</name>
-  <description>Specialized behaviors for ARS</description>
+  <name>com.joineryhq.arstweaks</name>
+  <description>FIXME</description>
   <license>GPL-3.0</license>
   <authors>
     <author>
@@ -12,18 +12,18 @@
     </author>
   </authors>
   <urls>
-    <url desc="Main Extension Page">https://github.com/JoineryHQ/com.joineryhq.arstweaks</url>
-    <url desc="Documentation">https://github.com/JoineryHQ/com.joineryhq.arstweaks/blob/master/README.md</url>
-    <url desc="Support">https://github.com/JoineryHQ/com.joineryhq.arstweaks/issues</url>
+    <url desc="Main Extension Page">https://FIXME</url>
+    <url desc="Documentation">https://FIXME</url>
+    <url desc="Support">https://FIXME</url>
     <url desc="Licensing">https://www.gnu.org/licenses/gpl-3.0.html</url>
   </urls>
-  <releaseDate>2025-11-10</releaseDate>
+  <releaseDate>2025-10-20</releaseDate>
   <version>1.0.0</version>
-  <develStage>beta</develStage>
+  <develStage>alpha</develStage>
   <compatibility>
     <ver>6.4</ver>
   </compatibility>
-  <comments>Has no configuration options, but makes various changes in the UI. See "Documentation".</comments>
+  <comments>This is a new, undeveloped module</comments>
   <classloader>
     <psr0 prefix="CRM_" path="."/>
     <psr4 prefix="Civi\" path="Civi"/>
