@@ -40,17 +40,17 @@ function arstweaks_civicrm_pageRun(&$page) {
   $page_name = $page->getVar('_name');
 
   if ($page_name == 'CRM_Contact_Page_View_UserDashBoard') {
-    if (! CRM_Extension_System::singleton()->getManager()->isEnabled('certificates')) {
+    if (!CRM_Extension_System::singleton()->getManager()->isEnabled('certificates')) {
       // Don't have the certificates extension? Nothing to do here. Just return.
       return;
     }
     $contactId = $page->getVar('_contactId');
-    if (!_arstweaksUserCanPrintCertificates($contactId)){
+    if (!_arstweaksUserCanPrintCertificates($contactId)) {
       // User can't print certificates? Nothing to do here. Just return.
       return;
     }
     // get all current-status memberships for this contact.
-    $currentMembershipIds=[];
+    $currentMembershipIds = [];
     $memberships = \Civi\Api4\Membership::get(TRUE)
       ->addSelect('id')
       ->addWhere('status_id.is_current_member', '=', TRUE)
