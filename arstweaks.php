@@ -40,6 +40,9 @@ function arstweaks_civicrm_pageRun(&$page) {
   $page_name = $page->getVar('_name');
 
   if ($page_name == 'CRM_Contact_Page_View_UserDashBoard') {
+    // Special handling for various dashboard tabs (e.g. relationships)
+    CRM_Core_Resources::singleton()->addScriptFile('com.joineryhq.arstweaks', 'js/CRM_Contact_Page_View_UserDashBoard.js', 100, 'page-footer');
+
     if (!CRM_Extension_System::singleton()->getManager()->isEnabled('certificates')) {
       // Don't have the certificates extension? Nothing to do here. Just return.
       return;
@@ -64,23 +67,7 @@ function arstweaks_civicrm_pageRun(&$page) {
       'contactId' => $contactId,
     ];
     CRM_Core_Resources::singleton()->addVars(E::SHORT_NAME, $vars);
-    CRM_Core_Resources::singleton()->addScriptFile(E::LONG_NAME, 'js/CRM_Contact_Page_View_UserDashBoard.js');
   }
-}
-
-function arstweaks_civicrm_dashboard($contactID, &$contentPlacement) {
-  // REPLACE Activity Listing with custom content
-  $contentPlacement = 3;
-  $content = array(
-    'Custom Content' => "Here is some custom content: $contactID",
-    'Custom Table' => "
-      <table>
-      <tr><th>Contact Name</th><th>Date</th></tr>
-      <tr><td>Foo</td><td>Bar</td></tr>
-      <tr><td>Goo</td><td>Tar</td></tr>
-      </table>",
-  );
-  return $content;
 }
 
 function _arstweaksUserCanPrintCertificates($contactId) {

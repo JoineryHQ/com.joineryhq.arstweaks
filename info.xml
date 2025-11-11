@@ -23,7 +23,7 @@
   <compatibility>
     <ver>6.4</ver>
   </compatibility>
-  <comments>Developed by Allen Shaw, Joinery</comments>
+  <comments>Has no configuration options, but makes various changes in the UI. See "Documentation".</comments>
   <classloader>
     <psr0 prefix="CRM_" path="."/>
     <psr4 prefix="Civi\" path="Civi"/>
