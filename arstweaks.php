@@ -11,6 +11,15 @@ use CRM_Arstweaks_ExtensionUtil as E;
  */
 function arstweaks_civicrm_config(&$config): void {
   _arstweaks_civix_civicrm_config($config);
+
+  // This hook sometimes runs twice
+  if (isset(Civi::$statics[__FUNCTION__])) {
+    return;
+  }
+  Civi::$statics[__FUNCTION__] = 1;
+
+  Civi::dispatcher()->addListener('civi.api.prepare', ['CRM_Arstweaks_APIWrapper', 'PREPARE'], -100);
+  Civi::dispatcher()->addListener('civi.api.respond', ['CRM_Arstweaks_APIWrapper', 'RESPOND'], -100);
 }
 
 /**
