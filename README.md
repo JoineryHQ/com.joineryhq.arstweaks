@@ -12,9 +12,11 @@ The following functions are provided by this extension:
     memberships (if the user has permissions to print membership Certificates for the
     given contact) add a button labled "Download membership card" which links to the 
     Certificates URL to create a PDF membership card for that membership.
-- On the CiviCRM Contact Dashboard, in the Relationships section, hide links that 
-  might lead to CiviCRM (and other elements that might imply greater access than
-  is actually available.)
+- On the CiviCRM Contact Dashboard:
+  - In the Relationships section, hide links that might lead to CiviCRM (and other
+    elements that might imply greater access than is actually available.)
+  - In the Contributions section, hide zero-dollar contributions, and otherwise
+    display all contributions (i.e., remove CiviCRM's limit of 12 in this section).
 
 ## Configuration
 This extension calls for no configuration. However, configurations and permissions for
