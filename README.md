@@ -17,6 +17,11 @@ The following functions are provided by this extension:
     elements that might imply greater access than is actually available.)
   - In the Contributions section, hide zero-dollar contributions, and otherwise
     display all contributions (i.e., remove CiviCRM's limit of 12 in this section).
+- Immediately after a new contact is created, that contact's External ID is populated
+  with a string equivalent to the contact ID preceded by 'M'.
+  NOTE: if a value for External Identifier is specified by the contact creation,
+  (e.g. by a CSV import column or API parameter) the automatic value will not be
+  applied.
 
 ## Configuration
 This extension calls for no configuration. However, configurations and permissions for

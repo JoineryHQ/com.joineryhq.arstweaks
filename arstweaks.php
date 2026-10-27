@@ -88,3 +88,24 @@ function _arstweaksUserCanPrintCertificates($contactId) {
     )
   );
 }
+
+/**
+ * Implements hook_civicrm_postCommit().
+ */
+function arstweaks_civicrm_postCommit($op, $objectName, $objectId, $objectRef = NULL, $params = NULL) {
+  if (
+    $op === 'create'
+    && in_array($objectName, ['Individual', 'Organization', 'Household'], TRUE)
+  ) {
+    CRM_Core_DAO::executeQuery(
+      'UPDATE civicrm_contact
+       SET external_identifier = %1
+       WHERE id = %2
+         AND external_identifier IS NULL',
+      [
+        1 => ['M' . $objectId, 'String'],
+        2 => [$objectId, 'Integer'],
+      ]
+    );
+  }
+}
